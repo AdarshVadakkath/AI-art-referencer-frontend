@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8080/api";
+const API_BASE = "https://ai-art-referencer-backend-1.onrender.com";
 
 export async function createProject({ file, title, prompt, moods }, token) {
   const formData = new FormData();
