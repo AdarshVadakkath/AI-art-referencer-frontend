@@ -1,4 +1,4 @@
-const API_BASE = "https://ai-art-referencer-backend-1.onrender.com";
+const API_BASE = "https://ai-art-referencer-backend-1.onrender.com/api";
 
 export async function createProject({ file, title, prompt, moods }, token) {
   const formData = new FormData();
