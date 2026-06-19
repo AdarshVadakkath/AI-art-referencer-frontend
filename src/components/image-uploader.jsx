@@ -1,13 +1,6 @@
 import * as React from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 import {
   UploadCloudIcon,
@@ -34,7 +27,6 @@ export function ImageUploader({
   const [fileName, setFileName] = React.useState("")
   const [file, setFile] = React.useState(null)
   const [sceneInfo, setSceneInfo] = React.useState("")
-  const [style, setStyle] = React.useState("auto")
   const inputRef = React.useRef(null)
 
   function handleFile(f) {
@@ -75,7 +67,7 @@ export function ImageUploader({
       file,
       title,
       prompt: sceneInfo.trim() || undefined,
-      moods: style === "auto" ? ["auto"] : [style],
+      moods: ["auto"],
     })
   }
 
@@ -84,7 +76,6 @@ export function ImageUploader({
     setFileName("")
     setFile(null)
     setSceneInfo("")
-    setStyle("auto")
     if (inputRef.current) inputRef.current.value = ""
     onReset?.()
   }
@@ -189,35 +180,11 @@ export function ImageUploader({
           </Label>
           <textarea
             className="min-h-[60px] sm:min-h-[72px] w-full resize-none rounded-xl border-3 border-toon-dark bg-white px-3 py-2 text-sm font-nunito-sans text-toon-dark shadow-toon-sm placeholder:text-toon-dark/40 focus:outline-none focus:bg-toon-soft"
-            placeholder="E.g. Fantasy forest, ruins, sci-fi outpost, etc."
+            placeholder="E.g. Fantasy forest, animation style, realistic rendering, etc."
             value={sceneInfo}
             onChange={(e) => setSceneInfo(e.target.value)}
             disabled={isLocked}
           />
-        </div>
-
-        {/* Style Preferences */}
-        <div className="flex flex-col gap-2">
-          <Label className="toon-label text-[11px]">
-            Style Preferences
-          </Label>
-          <Select
-            defaultValue="auto"
-            value={style}
-            onValueChange={setStyle}
-            disabled={isLocked}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select style" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="auto">Auto (AI will choose styles)</SelectItem>
-              <SelectItem value="realistic">Realistic</SelectItem>
-              <SelectItem value="cinematic">Cinematic</SelectItem>
-              <SelectItem value="fantasy">Fantasy</SelectItem>
-              <SelectItem value="stylized">Stylized</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
 
         {/* Send error */}
@@ -291,11 +258,7 @@ export function ImageUploader({
           </button>
         )}
 
-        {!isSent && !isSending && (
-          <p className="text-center text-[11px] text-toon-dark/50 font-nunito font-bold -mt-2">
-            Transaction cost: <span className="font-extrabold text-toon-purple">3 Credits</span>
-          </p>
-        )}
+
 
         <input
           ref={inputRef}
